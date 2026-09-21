@@ -7,6 +7,11 @@ services:
     volumes:
       - .:/app                     # tu proyecto <-> carpeta /app del contenedor
       - composer_cache:/root/.cache/composer   # caché de Composer (descargas más rápidas)
+    command: >
+      sh -c "(composer install --no-interaction --prefer-dist ||
+      composer update --no-interaction --prefer-dist) &&
+      echo '>> Listo. Abre http://localhost:8080' &&
+      php -S 0.0.0.0:8000 -t public"
 
 volumes:
   composer_cache:
