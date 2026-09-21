@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    container_name: composer-demo
+    ports:
+      - "8081:8000"                # host:contenedor
+    volumes:
+      - .:/app                     # tu proyecto <-> carpeta /app del contenedor
+      - composer_cache:/root/.cache/composer   # caché de Composer (descargas más rápidas)
+
+volumes:
+  composer_cache:
